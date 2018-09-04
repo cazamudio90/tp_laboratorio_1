@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1536018810 source:c:\users\usuario\desktop\trabajo practico\trabajo practico\utntp.c
+	<stdio.h>
+	<stdlib.h>
+	"utntp.h"
+
+1536015322 c:\users\usuario\desktop\trabajo practico\trabajo practico\utntp.h
+	<stdio.h>
+	<stdlib.h>
+	"utntp.h"
+
+1536018443 source:c:\users\usuario\desktop\trabajo practico\trabajo practico\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utntp.h"
+
