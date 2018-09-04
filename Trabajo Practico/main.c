@@ -89,7 +89,7 @@ int main()
 					printf("No se puede divir por 0 !!\n");
 				}
 				 printf("El resultado de A*B es: %f\n", multiplicar);
-				 if (numero1 > 1 && numero2 > 1)
+				 if (numero1 >= 1 && numero2 >= 1)
 				 {
 					printf("El factorial de A es: %d y el factorial de B es: %d\n", factorialA, factorialB);
 				 } else
@@ -109,7 +109,7 @@ int main()
 		}
         }else if (scanf("%s", &opcion)==1)
         {
-            printf("Error ingrese una opcion correcta");
+            printf("Error ingrese una opcion correcta\n");
         }
 		flag = 1;
 	} while (opcion != 5 || flag == 1);
