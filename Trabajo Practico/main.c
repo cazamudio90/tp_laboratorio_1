@@ -25,8 +25,8 @@ int main()
 		printf("3- Calcular todas las operaciones\n");
 		printf("4- Informar resultados\n");
 		printf("5- salir\n");
-		scanf("%d",&opcion);
-
+		if (scanf("%d",&opcion)== 1)
+        {
 		switch(opcion)
 		{
 			case 1:
@@ -107,6 +107,10 @@ int main()
 			 default:
 			 printf("Opcion no valida\n");
 		}
+        }else if (scanf("%s", &opcion)==1)
+        {
+            printf("Error ingrese una opcion correcta");
+        }
 		flag = 1;
 	} while (opcion != 5 || flag == 1);
   return 0;
