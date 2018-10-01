@@ -264,34 +264,60 @@ void printProducto(empleadoDes* pArray, int len)
 * \param limite Es el tamano maximo del string
 */
 int utn_getEmpleadoModificar(empleadoDes* pArray, int len, int id)
+{
+    int retorno = -1;
+    int resp;
+    char bufferNombre[51];
+    char bufferApellido[51];
+    float bufferSalario;
+    int bufferSector;
+    if(pArray != NULL && len > 0 && len>0 && id >= 0 && id < len )
     {
-        int retorno = -1;
-        char bufferNombre[51];
-		char bufferApellido[51];
-        float bufferSalario;
-		int bufferSector;
-        if(pArray != NULL && len > 0 && len>0 && id >= 0 && id < len )
+        if (pArray[id].isEmpty == 1)
         {
-            if (pArray[id].isEmpty == 1)
+            printf("\n Desea modificar : \n 1-Nombre: \n 2-Apellido: \n 3-Salario: \n 4 Sector: \n 5-Salir \n");
+            scanf("%d",&resp);
+            switch(resp)
             {
-                if (utn_getNombre(bufferNombre, 51, "Modifique Nombre\n", "No es un nombre valido\n", 2)==0 &&
-				    utn_getNombre( bufferApellido, 51, "Modifique apellido del Empleado\n","No es un apellido valido\n", 3) == 0 &&
-				    utn_getFloat(&bufferSalario,20, "Modifique Salario\n", "No es un precio valido\n",2 )== 0 &&
-					utn_getEntero( &bufferSector , 20, "Ingresar numero de Sector\n", "No es un sector valido\n", 3) == 0)
+                case 1:
+                if (utn_getNombre(bufferNombre, 51, "Modifique Nombre\n", "No es un nombre valido\n", 2)==0)
                 {
-                 strncpy(pArray[id].name, bufferNombre, 51);
-				 strncpy(pArray[id].lastName, bufferApellido, 51);
-                 pArray[id].salary =  bufferSalario;
-				 pArray[id].sector =  bufferSector;
-                retorno = 0;
+                    strncpy(pArray[id].name, bufferNombre, 51);
+                    printf("Nombre modicado\n");
+                    break;
                 }
-            }else
-            {
-                printf("No existe id\n");
+                case 2:
+                if (utn_getNombre( bufferApellido, 51, "Modifique apellido del Empleado\n","No es un apellido valido\n", 3) == 0)
+                {
+                    strncpy(pArray[id].lastName, bufferApellido, 51);
+                    printf("Apellido modicado\n");
+                    break;
+                }
+                case 3:
+                if (utn_getFloat(&bufferSalario,20, "Modifique Salario\n", "No es un precio valido\n",2 )== 0)
+                {
+                    pArray[id].salary =  bufferSalario;
+                    printf("Salario modicado\n");
+                    break;
+                }
+                case 4:
+                if (utn_getEntero( &bufferSector , 20, "Modifique numero de Sector\n", "No es un sector valido\n", 3) == 0)
+                {
+                    pArray[id].sector =  bufferSector;
+                    printf("Sector modicado\n");
+                    break;
+                }
+                default :
+                printf("Opcion no valida\n");
             }
+            retorno = 0;
+        }else
+        {
+            printf("No existe id\n");
         }
-    return retorno;
     }
+return retorno;
+}
 /**
 * \brief    evalua el id ingresado y en caso de exito y de haber informacion en ese id
 *           borra la informacion
