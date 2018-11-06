@@ -286,12 +286,10 @@ int Employee_sortById(void* thisA,void* thisB)
         Employee_getId(thisB, &idB);
         if( idA > idB)
         {
-           // printf("\nMAYOR");
             retorno = 1;
         }
         else if(idA < idB)
         {
-           // printf("\nMENOR");
             retorno = -1;
         }
     }

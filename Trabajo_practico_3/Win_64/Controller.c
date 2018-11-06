@@ -237,15 +237,28 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
     FILE* pArchivo = fopen(path,"w+");
-    if(pArchivo != NULL && pArrayListEmployee != NULL && ll_len(pArrayListEmployee) > 0 &&
-       parser_SaveToText(pArchivo,pArrayListEmployee) == 0)
+    Employee* pEmpleado = NULL;
+    int i;
+    char bufferNombre[1024];
+    int bufferId;
+    int bufferHorasTrabajadas;
+    int bufferSueldo;
+   if(pArchivo != NULL && pArrayListEmployee != NULL)
     {
-        printf("\nSe guardo lista existosamente\n");
-        retorno = 0;
-    }
-    else
-    {
-        printf("No hay ninguna lista cargada\n");
+        for(i=0; i<ll_len(pArrayListEmployee); i++)
+        {
+            if(i==0)
+            {
+                fprintf(pArchivo,"id,nombre,horas,sueldo\n");
+            }
+            pEmpleado = ll_get(pArrayListEmployee,i);
+            Employee_getNombre(pEmpleado,bufferNombre);
+            Employee_getHorasTrabajadas(pEmpleado,&bufferHorasTrabajadas);
+            Employee_getSueldo(pEmpleado,&bufferSueldo);
+            Employee_getId(pEmpleado,&bufferId);
+            fprintf(pArchivo,"%d,%s,%d,%d\n",bufferId,bufferNombre,bufferHorasTrabajadas,bufferSueldo);
+            retorno = 0;
+        }
     }
     fclose(pArchivo);
     return retorno;
@@ -331,7 +344,13 @@ void controller_mostratMenu()
             controller_sortEmployee(listaEmpleados);
             break;
             case 8:
-            controller_saveAsText("data.csv", listaEmpleados);
+            if (controller_saveAsText("data.csv", listaEmpleados) == 0)
+            {
+                printf("\nSe guardo lista existosamente\n");
+            }else
+            {
+                printf("No hay ninguna lista cargada\n");
+            }
             break;
             case 9:
             controller_saveAsBinary("data.bin", listaEmpleados);
